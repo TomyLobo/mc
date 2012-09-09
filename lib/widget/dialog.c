@@ -782,7 +782,7 @@ create_dlg (gboolean modal, int y1, int x1, int lines, int cols,
     new_d = g_new0 (Dlg_head, 1);
     w = WIDGET (new_d);
     init_widget (w, y1, x1, lines, cols, NULL, mouse_handler);
-    widget_want_cursor (*w, FALSE);
+    widget_want_cursor (w, FALSE);
 
     new_d->state = DLG_CONSTRUCT;
     new_d->modal = modal;

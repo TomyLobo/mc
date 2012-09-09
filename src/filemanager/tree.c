@@ -1290,7 +1290,7 @@ tree_new (int y, int x, int lines, int cols, gboolean is_panel)
     tree->active = 0;
 
     /* We do not want to keep the cursor */
-    widget_want_cursor (w, 0);
+    widget_want_cursor (w, FALSE);
     load_tree (tree);
     return tree;
 }
