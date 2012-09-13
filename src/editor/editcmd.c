@@ -468,8 +468,8 @@ edit_get_save_file_as (WEdit * edit)
             QUICK2_LABEL (N_("Change line breaks to:"), NULL),
             QUICK2_RADIO (LB_NAMES, lb_names, (int *) &cur_lb, NULL),
             QUICK2_START_BUTTONS (TRUE, TRUE),
-                QUICK2_BUTTON (N_("&Cancel"), B_CANCEL, NULL, NULL),
                 QUICK2_BUTTON (N_("&OK"), B_ENTER, NULL, NULL),
+                QUICK2_BUTTON (N_("&Cancel"), B_CANCEL, NULL, NULL),
             QUICK2_END
             /* *INDENT-ON* */
         };
@@ -1609,8 +1609,8 @@ edit_save_mode_cmd (void)
             QUICK2_SEPARATOR (TRUE),
             QUICK2_CHECKBOX (N_("Check &POSIX new line"), &option_check_nl_at_eof, NULL),
             QUICK2_START_BUTTONS (TRUE, TRUE),
-                QUICK2_BUTTON (N_("&Cancel"), B_CANCEL, NULL, NULL),
                 QUICK2_BUTTON (N_("&OK"), B_ENTER, NULL, NULL),
+                QUICK2_BUTTON (N_("&Cancel"), B_CANCEL, NULL, NULL),
             QUICK2_END
             /* *INDENT-ON* */
         };
