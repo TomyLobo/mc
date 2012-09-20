@@ -46,7 +46,7 @@
 
 /*** file scope macro definitions ****************************************************************/
 
-#define OPT_DLG_H 17
+#define OPT_DLG_H 18
 #define OPT_DLG_W 74
 
 /*** file scope type declarations ****************************************************************/
@@ -127,39 +127,41 @@ edit_options_dialog (Dlg_head * h)
     QuickWidget quick_widgets[] = {
         /*  0 */ QUICK_BUTTON (6, 10, OPT_DLG_H - 3, OPT_DLG_H, N_("&Cancel"), B_CANCEL, NULL),
         /*  1 */ QUICK_BUTTON (2, 10, OPT_DLG_H - 3, OPT_DLG_H, N_("&OK"), B_ENTER, NULL),
-        /*  2 */ QUICK_LABEL (OPT_DLG_W / 2 + 1, OPT_DLG_W, 12, OPT_DLG_H,
+        /*  2 */ QUICK_LABEL (OPT_DLG_W / 2 + 1, OPT_DLG_W, 13, OPT_DLG_H,
                               N_("Word wrap line length:")),
-        /*  3 */ QUICK_INPUT (OPT_DLG_W / 2 + 25, OPT_DLG_W, 12, OPT_DLG_H,
+        /*  3 */ QUICK_INPUT (OPT_DLG_W / 2 + 25, OPT_DLG_W, 13, OPT_DLG_H,
                               wrap_length, OPT_DLG_W / 2 - 4 - 24, 0, "edit-word-wrap", &p),
-        /*  4 */ QUICK_CHECKBOX (OPT_DLG_W / 2 + 1, OPT_DLG_W, 11, OPT_DLG_H,
+        /*  4 */ QUICK_CHECKBOX (OPT_DLG_W / 2 + 1, OPT_DLG_W, 12, OPT_DLG_H,
                                  N_("&Group undo"), &option_group_undo),
-        /*  5 */ QUICK_CHECKBOX (OPT_DLG_W / 2 + 1, OPT_DLG_W, 10, OPT_DLG_H,
+        /*  5 */ QUICK_CHECKBOX (OPT_DLG_W / 2 + 1, OPT_DLG_W, 11, OPT_DLG_H,
+                                 N_("Cursor after inserted block"), &option_cursor_after_inserted_block),
+        /*  6 */ QUICK_CHECKBOX (OPT_DLG_W / 2 + 1, OPT_DLG_W, 10, OPT_DLG_H,
                                  N_("Cursor beyond end of line"), &option_cursor_beyond_eol),
-        /*  6 */ QUICK_CHECKBOX (OPT_DLG_W / 2 + 1, OPT_DLG_W, 9, OPT_DLG_H,
+        /*  7 */ QUICK_CHECKBOX (OPT_DLG_W / 2 + 1, OPT_DLG_W, 9, OPT_DLG_H,
                                  N_("Pers&istent selection"), &option_persistent_selections),
-        /*  7 */ QUICK_CHECKBOX (OPT_DLG_W / 2 + 1, OPT_DLG_W, 8, OPT_DLG_H,
+        /*  8 */ QUICK_CHECKBOX (OPT_DLG_W / 2 + 1, OPT_DLG_W, 8, OPT_DLG_H,
                                  N_("Synta&x highlighting"), &option_syntax_highlighting),
-        /*  8 */ QUICK_CHECKBOX (OPT_DLG_W / 2 + 1, OPT_DLG_W, 7, OPT_DLG_H,
+        /*  9 */ QUICK_CHECKBOX (OPT_DLG_W / 2 + 1, OPT_DLG_W, 7, OPT_DLG_H,
                                  N_("Visible tabs"), &visible_tabs),
-        /*  9 */ QUICK_CHECKBOX (OPT_DLG_W / 2 + 1, OPT_DLG_W, 6, OPT_DLG_H,
+        /* 10 */ QUICK_CHECKBOX (OPT_DLG_W / 2 + 1, OPT_DLG_W, 6, OPT_DLG_H,
                                  N_("Visible trailing spaces"), &visible_tws),
-        /* 10 */ QUICK_CHECKBOX (OPT_DLG_W / 2 + 1, OPT_DLG_W, 5, OPT_DLG_H,
+        /* 11 */ QUICK_CHECKBOX (OPT_DLG_W / 2 + 1, OPT_DLG_W, 5, OPT_DLG_H,
                                  N_("Save file &position"), &option_save_position),
-        /* 11 */ QUICK_CHECKBOX (OPT_DLG_W / 2 + 1, OPT_DLG_W, 4, OPT_DLG_H,
+        /* 12 */ QUICK_CHECKBOX (OPT_DLG_W / 2 + 1, OPT_DLG_W, 4, OPT_DLG_H,
                                  N_("Confir&m before saving"), &edit_confirm_save),
-        /* 12 */ QUICK_CHECKBOX (OPT_DLG_W / 2 + 1, OPT_DLG_W, 3, OPT_DLG_H,
+        /* 13 */ QUICK_CHECKBOX (OPT_DLG_W / 2 + 1, OPT_DLG_W, 3, OPT_DLG_H,
                                  N_("&Return does autoindent"), &option_return_does_auto_indent),
-        /* 13 */ QUICK_LABEL (3, OPT_DLG_W, 11, OPT_DLG_H, N_("Tab spacing:")),
-        /* 14 */ QUICK_INPUT (3 + 24, OPT_DLG_W, 11, OPT_DLG_H,
+        /* 14 */ QUICK_LABEL (3, OPT_DLG_W, 11, OPT_DLG_H, N_("Tab spacing:")),
+        /* 15 */ QUICK_INPUT (3 + 24, OPT_DLG_W, 11, OPT_DLG_H,
                               tab_spacing, OPT_DLG_W / 2 - 4 - 24, 0, "edit-tab-spacing", &q),
-        /* 15 */ QUICK_CHECKBOX (3, OPT_DLG_W, 10, OPT_DLG_H,
+        /* 16 */ QUICK_CHECKBOX (3, OPT_DLG_W, 10, OPT_DLG_H,
                                  N_("Fill tabs with &spaces"), &option_fill_tabs_with_spaces),
-        /* 16 */ QUICK_CHECKBOX (3, OPT_DLG_W, 9, OPT_DLG_H,
+        /* 17 */ QUICK_CHECKBOX (3, OPT_DLG_W, 9, OPT_DLG_H,
                                  N_("&Backspace through tabs"), &option_backspace_through_tabs),
-        /* 17 */ QUICK_CHECKBOX (3, OPT_DLG_W, 8, OPT_DLG_H,
+        /* 18 */ QUICK_CHECKBOX (3, OPT_DLG_W, 8, OPT_DLG_H,
                                  N_("&Fake half tabs"), &option_fake_half_tabs),
-        /* 18 */ QUICK_RADIO (4, OPT_DLG_W, 4, OPT_DLG_H, 3, wrap_str, &wrap_mode),
-        /* 19 */ QUICK_LABEL (3, OPT_DLG_W, 3, OPT_DLG_H, N_("Wrap mode")),
+        /* 19 */ QUICK_RADIO (4, OPT_DLG_W, 4, OPT_DLG_H, 3, wrap_str, &wrap_mode),
+        /* 20 */ QUICK_LABEL (3, OPT_DLG_W, 3, OPT_DLG_H, N_("Wrap mode")),
         QUICK_END
     };
 
