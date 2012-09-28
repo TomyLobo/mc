@@ -2433,13 +2433,7 @@ edit_block_copy_cmd (WEdit * edit)
     edit_scroll_screen_over_cursor (edit);
 
     if (edit->column_highlight)
-    {
         edit_set_markers (edit, edit->curs1, mark2, c1, c2);
-
-        /* Place cursor at the end of text selection */
-        if (option_cursor_after_inserted_block)
-            edit_cursor_move (edit, mark2 - current);
-    }
     else if (start_mark < current && end_mark > current)
         edit_set_markers (edit, start_mark, end_mark + end_mark - start_mark, 0, 0);
 
