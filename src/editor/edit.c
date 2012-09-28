@@ -2143,10 +2143,6 @@ edit_insert_file (WEdit * edit, const vfs_path_t * filename_vpath)
             blocklen = edit_insert_column_of_text_from_file (edit, file, &mark1, &mark2, &c1, &c2);
             edit_set_markers (edit, edit->curs1, mark2, c1, c2);
 
-            /* Place cursor at the end of text selection */
-            if (option_cursor_after_inserted_block)
-                edit_cursor_move (edit, mark2 - current);
-
             /* highlight inserted text then not persistent blocks */
             if (!option_persistent_selections && edit->modified)
             {
