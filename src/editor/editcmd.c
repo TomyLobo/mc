@@ -2511,10 +2511,6 @@ edit_block_move_cmd (WEdit * edit)
 
         edit_insert_column_of_text (edit, copy_buf, size, b_width, &mark1, &mark2, &c1, &c2);
         edit_set_markers (edit, mark1, mark2, c1, c2);
-
-        /* Place cursor at the end of text selection */
-        if (option_cursor_after_inserted_block)
-            edit_cursor_move (edit, mark2 - current);
     }
     else
     {
