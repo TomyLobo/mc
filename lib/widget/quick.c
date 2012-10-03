@@ -555,7 +555,7 @@ quick_dialog_skip (quick_dialog_t * quick_dlg, int nskip)
 
             /* add widget into dialog */
             item->widget->options |= item->quick_widget->options;       /* FIXME: cannot reset flags, setup only */
-            id = add_widget (dd, item->widget);
+            id = add_widget_autopos (dd, item->widget, item->quick_widget->pos_flags, NULL);
             if (item->quick_widget->id != NULL)
                 *item->quick_widget->id = id;
         }
