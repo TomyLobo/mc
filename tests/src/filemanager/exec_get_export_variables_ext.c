@@ -94,7 +94,7 @@ MC_EXT_CURRENTDIR=/home\n\
 export MC_EXT_CURRENTDIR\n\
 MC_EXT_SELECTED=selected\\ file.txt\n\
 export MC_EXT_SELECTED\n\
-MC_EXT_ONLYTAGGED=tagged\\ file1.txt tagged\\ file2.txt \n\
+MC_EXT_ONLYTAGGED=\"tagged\\ file1.txt tagged\\ file2.txt \"\n\
 export MC_EXT_ONLYTAGGED\n";
 
     fail_unless (
