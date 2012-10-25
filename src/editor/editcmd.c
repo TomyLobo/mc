@@ -3688,18 +3688,14 @@ edit_spellcheck_file (WEdit * edit)
 void
 edit_set_spell_lang (void)
 {
-    GArray *lang_list;
+    char *lang;
 
-    lang_list = g_array_new (TRUE, FALSE, sizeof (char *));
-    if (aspell_get_lang_list (lang_list) != 0)
-    {
-        char *lang;
+    aspell_get_lang_list ();
+    lang = spell_dialog_lang_list_show (spell_lang_list);
+    if (lang != NULL)
+        (void) aspell_set_lang (lang);
+    aspell_lang_list_clean ();
 
-        lang = spell_dialog_lang_list_show (lang_list);
-        if (lang != NULL)
-            (void) aspell_set_lang (lang);
-    }
-    aspell_array_clean (lang_list);
 }
 #endif /* HAVE_ASPELL */
 

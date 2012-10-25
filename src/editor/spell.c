@@ -42,6 +42,8 @@
 
 /*** global variables ****************************************************************************/
 
+GArray *spell_lang_list = NULL;
+
 /*** file scope macro definitions ****************************************************************/
 
 /*** file scope type declarations ****************************************************************/
@@ -293,6 +295,7 @@ aspell_init (void)
         return;
 
     global_speller = g_try_malloc (sizeof (spell_t));
+
     if (global_speller == NULL)
         return;
 
@@ -333,6 +336,7 @@ aspell_init (void)
 void
 aspell_clean (void)
 {
+
     if (global_speller == NULL)
         return;
 
@@ -358,35 +362,49 @@ aspell_clean (void)
  */
 
 unsigned int
-aspell_get_lang_list (GArray * lang_list)
+aspell_get_lang_list ()
 {
     AspellDictInfoList *dlist;
     AspellDictInfoEnumeration *elem;
     const AspellDictInfo *entry;
     unsigned int i = 0;
+    AspellConfig *config;
+    char *tmp;
 
-    if (spell_module == NULL)
-        return 0;
+    if (spell_lang_list == NULL)
+        spell_lang_list = g_array_new (TRUE, FALSE, sizeof (char *));
 
+    mc_log ("aspell_get_lang_list 1\n");
     /* the returned pointer should _not_ need to be deleted */
-    dlist = mc_get_aspell_dict_info_list (global_speller->config);
+
+    config = mc_new_aspell_config ();
+    mc_log ("aspell_get_lang_list 1.2\n");
+    dlist = mc_get_aspell_dict_info_list (config);
+    mc_log ("aspell_get_lang_list 1.3\n");
     elem = mc_aspell_dict_info_list_elements (dlist);
 
+    mc_log ("aspell_get_lang_list 2\n");
     while ((entry = mc_aspell_dict_info_enumeration_next (elem)) != NULL)
     {
         if (entry->name != NULL)
         {
-            char *tmp;
-
             tmp = g_strdup (entry->name);
-            g_array_append_val (lang_list, tmp);
+            g_array_append_val (spell_lang_list, tmp);
             i++;
         }
     }
+    mc_log ("aspell_get_lang_list 3\n");
+    tmp = g_strdup ("NONE");
+    g_array_append_val (spell_lang_list, tmp);
 
     mc_delete_aspell_dict_info_enumeration (elem);
+    mc_log ("aspell_get_lang_list 4\n");
 
-    return i;
+    mc_delete_aspell_config (config);
+    config = NULL;
+    mc_log ("aspell_get_lang_list 5\n");
+
+    return i + 1;
 }
 
 /* --------------------------------------------------------------------------------------------- */
@@ -428,6 +446,18 @@ aspell_get_lang (void)
 
     code = mc_aspell_config_retrieve (global_speller->config, "lang");
     return spell_decode_lang (code);
+}
+
+/* --------------------------------------------------------------------------------------------- */
+/**
+ * Clean languages list.
+ *
+ */
+
+void
+aspell_lang_list_clean (void)
+{
+    aspell_array_clean (spell_lang_list);
 }
 
 /* --------------------------------------------------------------------------------------------- */
